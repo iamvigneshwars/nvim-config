@@ -30,3 +30,7 @@ vim.keymap.set('n', '<Leader>tn', ':tabnew<CR>')      -- New tab
 vim.keymap.set('n', '<Leader>tc', ':tabclose<CR>')    -- Close tab
 vim.keymap.set('n', '<Leader>]', ':tabnext<CR>')     -- Next tab
 vim.keymap.set('n', '<Leader>[', ':tabprevious<CR>') --
+-- Run python
+vim.keymap.set('n', '<C-c>', ':w<CR>:TermExec cmd="python3 %"<CR>')
+-- Terminal
+vim.keymap.set('t', '<Esc>', '<C-\\><C-n>')
