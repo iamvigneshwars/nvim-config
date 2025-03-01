@@ -34,3 +34,21 @@ vim.keymap.set('n', '<Leader>[', ':tabprevious<CR>') --
 vim.keymap.set('n', '<C-c>', ':w<CR>:TermExec cmd="python3 %"<CR>')
 -- Terminal
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>')
+-- Alt+Shift+Arrow keys to move windows (similar to VSCode behavior)
+vim.keymap.set('n', '<A-S-h>', '<C-w>H', { noremap = true, desc = "Move window to far left" })
+vim.keymap.set('n', '<A-S-l>', '<C-w>L', { noremap = true, desc = "Move window to far right" })
+vim.keymap.set('n', '<A-S-k>', '<C-w>K', { noremap = true, desc = "Move window to very top" })
+vim.keymap.set('n', '<A-S-j>', '<C-w>J', { noremap = true, desc = "Move window to very bottom" })
+-- Move tabs left and right
+vim.keymap.set('n', '<leader>{', ':tabmove -1<CR>', { noremap = true, silent = true, desc = "Move tab left" })
+vim.keymap.set('n', '<leader>}', ':tabmove +1<CR>', { noremap = true, silent = true, desc = "Move tab right" })
+-- Create splits in different directions
+vim.keymap.set('n', '<leader>sh', ':leftabove vsplit<CR>', { noremap = true, silent = true, desc = "Split window left" })
+vim.keymap.set('n', '<leader>sl', ':rightbelow vsplit<CR>', { noremap = true, silent = true, desc = "Split window right" })
+vim.keymap.set('n', '<leader>sk', ':leftabove split<CR>', { noremap = true, silent = true, desc = "Split window above" })
+vim.keymap.set('n', '<leader>sj', ':rightbelow split<CR>', { noremap = true, silent = true, desc = "Split window below" })
+-- Resize windows
+-- vim.keymap.set('n', '<C-A-Left>', ':vertical resize -5<CR>', { noremap = true, silent = true, desc = "Decrease width" })
+-- vim.keymap.set('n', '<C-A-Right>', ':vertical resize +5<CR>', { noremap = true, silent = true, desc = "Increase width" })
+-- vim.keymap.set('n', '<C-A-Up>', ':resize +5<CR>', { noremap = true, silent = true, desc = "Increase height" })
+-- vim.keymap.set('n', '<C-A-Down>', ':resize -5<CR>', { noremap = true, silent = true, desc = "Decrease height" })
