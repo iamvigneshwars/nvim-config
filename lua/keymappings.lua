@@ -1,5 +1,5 @@
 local map = vim.keymap.set
-vim.g.mapleader= " "
+vim.g.mapleader = " "
 vim.cmd("set expandtab")
 vim.cmd("set tabstop=4")
 vim.cmd("set softtabstop=4")
@@ -15,10 +15,10 @@ vim.keymap.set('n', '<Leader>sh', ':hsplit<CR>')
 -- Clear search highlighting
 vim.keymap.set('n', '<Leader>/', ':nohlsearch<CR>')
 -- Save and quit shortcuts
-vim.keymap.set('n', '<Leader>w', ':w<CR>')    -- Save
-vim.keymap.set('n', '<Leader>q', ':q<CR>')    -- Quit
-vim.keymap.set('n', '<Leader>qq', ':qa<CR>')    -- Quit all
-vim.keymap.set('n', '<Leader>Q', ':qa!<CR>')  -- Force quit all
+vim.keymap.set('n', '<Leader>w', ':w<CR>')   -- Save
+vim.keymap.set('n', '<Leader>q', ':q<CR>')   -- Quit
+vim.keymap.set('n', '<Leader>qq', ':qa<CR>') -- Quit all
+vim.keymap.set('n', '<Leader>Q', ':qa!<CR>') -- Force quit all
 -- Resize splits
 vim.keymap.set('n', '<Leader>+', ':vertical resize +5<CR>')
 vim.keymap.set('n', '<Leader>-', ':vertical resize -5<CR>')
@@ -27,8 +27,8 @@ vim.keymap.set('n', '<Leader>_', ':resize -5<CR>')
 -- Neo Tree
 vim.keymap.set('n', '<C-n>', ':Neotree toggle<CR>')
 -- Tab management
-vim.keymap.set('n', '<Leader>tn', ':tabnew<CR>')      -- New tab
-vim.keymap.set('n', '<Leader>tc', ':tabclose<CR>')    -- Close tab
+vim.keymap.set('n', '<Leader>tn', ':tabnew<CR>')     -- New tab
+vim.keymap.set('n', '<Leader>tc', ':tabclose<CR>')   -- Close tab
 vim.keymap.set('n', '<Leader>]', ':tabnext<CR>')     -- Next tab
 vim.keymap.set('n', '<Leader>[', ':tabprevious<CR>') --
 -- Run python
@@ -45,6 +45,12 @@ vim.keymap.set('n', '<leader>{', ':tabmove -1<CR>', { noremap = true, silent = t
 vim.keymap.set('n', '<leader>}', ':tabmove +1<CR>', { noremap = true, silent = true, desc = "Move tab right" })
 -- Create splits in different directions
 vim.keymap.set('n', '<leader>sh', ':leftabove vsplit<CR>', { noremap = true, silent = true, desc = "Split window left" })
-vim.keymap.set('n', '<leader>sl', ':rightbelow vsplit<CR>', { noremap = true, silent = true, desc = "Split window right" })
+vim.keymap.set('n', '<leader>sl', ':rightbelow vsplit<CR>',
+    { noremap = true, silent = true, desc = "Split window right" })
 vim.keymap.set('n', '<leader>sk', ':leftabove split<CR>', { noremap = true, silent = true, desc = "Split window above" })
 vim.keymap.set('n', '<leader>sj', ':rightbelow split<CR>', { noremap = true, silent = true, desc = "Split window below" })
+-- Beffers
+-- Buffer navigation
+vim.keymap.set('n', '<leader>bn', ':bnext<CR>', { noremap = true, silent = true })     -- Next buffer
+vim.keymap.set('n', '<leader>bp', ':bprevious<CR>', { noremap = true, silent = true }) -- Previous buffer
+vim.keymap.set('n', '<leader>bd', ':bdelete<CR>', { noremap = true, silent = true })   -- Delete buffer
