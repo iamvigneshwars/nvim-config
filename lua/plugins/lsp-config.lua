@@ -1,35 +1,47 @@
 return {
+    -- Mason
     {
         "williamboman/mason.nvim",
         config = function()
             require("mason").setup()
         end
     },
+    -- Tree sitter
+    {
+        "nvim-treesitter/nvim-treesitter",
+        build = ":TSUpdate",
+        config = function()
+            local config = require("nvim-treesitter.configs")
+            config.setup({
+                ensure_installed = { "lua", "python", "rust", "vim", "markdown" },
+                highlight = { enable = true },
+                indent = { enable = true },
+            })
+        end,
+    },
 
     {
         "williamboman/mason-lspconfig.nvim",
         config = function()
             require("mason-lspconfig").setup({
-                ensure_installed = {"lua_ls", "pyright", "rust_analyzer"}
+                ensure_installed = { "lua_ls", "pyright", "rust_analyzer" }
             })
         end
     },
-    
     -- Autocompletion plugin
     {
         "hrsh7th/nvim-cmp",
         dependencies = {
-            "hrsh7th/cmp-nvim-lsp",         -- LSP source for nvim-cmp
-            "hrsh7th/cmp-buffer",           -- Buffer completions
-            "hrsh7th/cmp-path",             -- Path completions
-            "hrsh7th/cmp-cmdline",          -- Command line completions
-            "L3MON4D3/LuaSnip",             -- Snippet engine
-            "saadparwaiz1/cmp_luasnip",     -- Luasnip completion source
+            "hrsh7th/cmp-nvim-lsp",     -- LSP source for nvim-cmp
+            "hrsh7th/cmp-buffer",       -- Buffer completions
+            "hrsh7th/cmp-path",         -- Path completions
+            "hrsh7th/cmp-cmdline",      -- Command line completions
+            "L3MON4D3/LuaSnip",         -- Snippet engine
+            "saadparwaiz1/cmp_luasnip", -- Luasnip completion source
         },
         config = function()
             local cmp = require("cmp")
             local luasnip = require("luasnip")
-            
             cmp.setup({
                 snippet = {
                     expand = function(args)
@@ -67,7 +79,6 @@ return {
             })
         end
     },
-    
     {
         "neovim/nvim-lspconfig",
         dependencies = {
@@ -79,21 +90,34 @@ return {
             lspconfig.lua_ls.setup({
                 capabilities = capabilities
             })
-            
             lspconfig.pyright.setup({
                 capabilities = capabilities,
-                filetypes = {"python"}
+                filetypes = { "python" }
             })
-            
             lspconfig.rust_analyzer.setup({
                 capabilities = capabilities
             })
-            
             vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
             vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {})
-            vim.keymap.set({'n', 'v'}, '<leader>ca', vim.lsp.buf.code_action, {})
+            vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, {})
             vim.keymap.set('n', 'gr', vim.lsp.buf.references, {})
             vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, {})
         end
+    },
+    -- None LS
+    {
+        "nvimtools/none-ls.nvim",
+        config = function()
+            local null_ls = require("null-ls")
+            null_ls.setup({
+                sources = {
+                    null_ls.builtins.formatting.stylua,
+                    null_ls.builtins.formatting.black,
+                    null_ls.builtins.formatting.isort,
+                    null_ls.builtins.completion.spell,
+                },
+            })
+            vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, {})
+        end,
     }
 }
