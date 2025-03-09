@@ -49,7 +49,6 @@ vim.keymap.set('n', '<leader>sl', ':rightbelow vsplit<CR>',
     { noremap = true, silent = true, desc = "Split window right" })
 vim.keymap.set('n', '<leader>sk', ':leftabove split<CR>', { noremap = true, silent = true, desc = "Split window above" })
 vim.keymap.set('n', '<leader>sj', ':rightbelow split<CR>', { noremap = true, silent = true, desc = "Split window below" })
--- Beffers
 -- Buffer navigation
 vim.keymap.set('n', '<leader>]', ':bnext<CR>', { noremap = true, silent = true })     -- Next buffer
 vim.keymap.set('n', '<leader>[', ':bprevious<CR>', { noremap = true, silent = true }) -- Previous buffer
@@ -59,3 +58,13 @@ vim.keymap.set('n', '<leader>mt', ':tabnew | buffer #<CR>',
     { noremap = true, silent = true, desc = "Move buffer to new tab" })
 -- Close the current window
 vim.keymap.set('n', '<leader>wc', ':close<CR>', { noremap = true, silent = true, desc = "Close current window" })
+-- Yank from clipboard
+vim.keymap.set({ 'n', 'v' }, '<leader>y', '"+y', { desc = 'Yank to clipboard' })
+vim.keymap.set({ 'n', 'v' }, '<leader>p', '"+p', { desc = 'Paste from clipboard' })
+vim.keymap.set({ 'n', 'v' }, '<leader>P', '"+P', { desc = 'Paste from clipboard before cursor' })
+-- Keymaps for switching buffers using numbers
+for i = 1, 9 do
+    vim.keymap.set('n', '<leader>' .. i, function()
+        require('bufferline').go_to_buffer(i, true)
+    end, { desc = 'Go to buffer ' .. i })
+end
