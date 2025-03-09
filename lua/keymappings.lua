@@ -27,10 +27,10 @@ vim.keymap.set('n', '<Leader>_', ':resize -5<CR>')
 -- Neo Tree
 vim.keymap.set('n', '<C-n>', ':Neotree toggle<CR>')
 -- Tab management
-vim.keymap.set('n', '<Leader>tn', ':tabnew<CR>')     -- New tab
-vim.keymap.set('n', '<Leader>tc', ':tabclose<CR>')   -- Close tab
-vim.keymap.set('n', '<Leader>]', ':tabnext<CR>')     -- Next tab
-vim.keymap.set('n', '<Leader>[', ':tabprevious<CR>') --
+vim.keymap.set('n', '<Leader>tn', ':tabnew<CR>')      -- New tab
+vim.keymap.set('n', '<Leader>tc', ':tabclose<CR>')    -- Close tab
+vim.keymap.set('n', '<Leader>tn', ':tabnext<CR>')     -- Next tab
+vim.keymap.set('n', '<Leader>tp', ':tabprevious<CR>') --
 -- Run python
 vim.keymap.set('n', '<C-c>', ':w<CR>:TermExec cmd="clear && python3 %"<CR>')
 -- Terminal
@@ -51,6 +51,11 @@ vim.keymap.set('n', '<leader>sk', ':leftabove split<CR>', { noremap = true, sile
 vim.keymap.set('n', '<leader>sj', ':rightbelow split<CR>', { noremap = true, silent = true, desc = "Split window below" })
 -- Beffers
 -- Buffer navigation
-vim.keymap.set('n', '<leader>bn', ':bnext<CR>', { noremap = true, silent = true })     -- Next buffer
-vim.keymap.set('n', '<leader>bp', ':bprevious<CR>', { noremap = true, silent = true }) -- Previous buffer
-vim.keymap.set('n', '<leader>bd', ':bdelete<CR>', { noremap = true, silent = true })   -- Delete buffer
+vim.keymap.set('n', '<leader>]', ':bnext<CR>', { noremap = true, silent = true })     -- Next buffer
+vim.keymap.set('n', '<leader>[', ':bprevious<CR>', { noremap = true, silent = true }) -- Previous buffer
+vim.keymap.set('n', '<leader>bd', ':bdelete<CR>', { noremap = true, silent = true })  -- Delete buffer
+-- Move buffer to a new tab
+vim.keymap.set('n', '<leader>mt', ':tabnew | buffer #<CR>',
+    { noremap = true, silent = true, desc = "Move buffer to new tab" })
+-- Close the current window
+vim.keymap.set('n', '<leader>wc', ':close<CR>', { noremap = true, silent = true, desc = "Close current window" })
