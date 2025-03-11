@@ -12,10 +12,10 @@ map('n', '<C-l>', '<C-w>l')
 -- Clear search highlighting
 map('n', '<Esc>', ':nohlsearch<CR>')
 -- Save and quit shortcuts
-map('n', '<Leader>w', ':w<CR>')   -- Save
-map('n', '<Leader>q', ':q<CR>')   -- Quit
-map('n', '<Leader>qq', ':qa<CR>') -- Quit all
-map('n', '<Leader>Q', ':qa!<CR>') -- Force quit all
+map('n', '<Leader>w', ':w<CR>')
+map('n', '<Leader>q', ':q<CR>')
+map('n', '<Leader>qq', ':wqa<CR>')
+map('n', '<Leader>Q', ':qa!<CR>')
 -- Resize splits
 map('n', '<Leader>+', ':vertical resize +5<CR>')
 map('n', '<Leader>-', ':vertical resize -5<CR>')
