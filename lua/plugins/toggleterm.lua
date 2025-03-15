@@ -10,7 +10,7 @@ return {
                     return vim.o.columns * 0.4
                 end
             end,
-            open_mapping = [[<C-/>]],
+            open_mapping = [[<C-\>]],
             hide_numbers = true,
             shade_terminals = true,
             shading_factor = 2,
@@ -49,15 +49,14 @@ return {
                 vim.cmd("startinsert!")
             end,
         })
-        function _G.toggle_lazygit()
+        _G.toggle_lazygit = function()
             lazygit:toggle()
         end
-
-        function _G.toggle_python()
+        _G.toggle_python = function()
             python:toggle()
         end
-
         vim.api.nvim_set_keymap("n", "<leader>gl", "<cmd>lua toggle_lazygit()<CR>", { noremap = true, silent = true })
         vim.api.nvim_set_keymap("n", "<leader>tp", "<cmd>lua toggle_python()<CR>", { noremap = true, silent = true })
+        vim.api.nvim_set_keymap("n", "<leader>tt", "<cmd>ToggleTerm<CR>", { noremap = true, silent = true })
     end,
 }

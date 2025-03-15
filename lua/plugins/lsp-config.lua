@@ -94,9 +94,6 @@ return {
                 capabilities = capabilities,
                 filetypes = { "python" }
             })
-            lspconfig.rust_analyzer.setup({
-                capabilities = capabilities
-            })
             vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
             vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {})
             vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, {})
@@ -143,6 +140,65 @@ return {
                 cmp_autopairs.on_confirm_done()
             )
         end
+    },
+    -- Rust Tools for enhanced Rust development
+    {
+        "simrat39/rust-tools.nvim",
+        dependencies = {
+            "neovim/nvim-lspconfig",
+        },
+        config = function()
+            local rt = require("rust-tools")
+            rt.setup({
+                server = {
+                    on_attach = function(_, bufnr)
+                        rt.inlay_hints.enable()
+                        vim.keymap.set("n", "K", rt.hover_actions.hover_actions, { buffer = bufnr })
+                        vim.keymap.set("n", "<Leader>ca", rt.code_action_group.code_action_group, { buffer = bufnr })
+                        vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = bufnr })
+                        vim.keymap.set("n", "gr", vim.lsp.buf.references, { buffer = bufnr })
+                        vim.keymap.set("n", "<Leader>rn", vim.lsp.buf.rename, { buffer = bufnr })
+                    end,
+                    settings = {
+                        ["rust-analyzer"] = {
+                            inlayHints = {
+                                enable = true,
+                                chainingHints = {
+                                    enable = true,
+                                },
+                                maxLength = 25,
+                                parameterHints = {
+                                    enable = true,
+                                },
+                                typeHints = {
+                                    enable = true,
+                                },
+                                implicitDrops = {
+                                    enable = true,
+                                },
+                                bindingModeHints = {
+                                    enable = true,
+                                },
+                            },
+                            checkOnSave = {
+                                command = "clippy"
+                            },
+                            procMacro = {
+                                enable = true
+                            },
+                            cargo = {
+                                loadOutDirsFromCheck = true,
+                                allFeatures = true,
+                            },
+                        }
+                    },
+                },
+                tools = {
+                    hover_actions = {
+                        auto_focus = true,
+                    },
+                },
+            })
+        end
     }
 }
-
