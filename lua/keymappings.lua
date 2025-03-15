@@ -65,6 +65,6 @@ for i = 1, 9 do
 end
 -- Terminal
 map("t", "<C-x>", "<C-\\><C-N>", { desc = "terminal escape terminal mode" })
-map("n", "<A-\\>", "<cmd>ToggleTerm direction=vertical<CR>", { desc = "Toggle vertical terminal" })
-map("n", "<leader>ft", "<cmd>ToggleTerm direction=float<CR>", { desc = "Toggle floating terminal" })
-map("n", "<C-/>", "<cmd>ToggleTerm direction=horizontal<CR>", { desc = "Toggle horizontal terminal" })
+map("n", "<leader>tv", "<cmd>ToggleTerm direction=vertical<CR>", { desc = "Toggle vertical terminal" })
+map("n", "<leader>tf", "<cmd>ToggleTerm direction=float<CR>", { desc = "Toggle floating terminal" })
+map("n", "<leader>th", "<cmd>ToggleTerm direction=horizontal<CR>", { desc = "Toggle horizontal terminal" })
