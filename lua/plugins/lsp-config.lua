@@ -13,7 +13,7 @@ return {
         config = function()
             local config = require("nvim-treesitter.configs")
             config.setup({
-                ensure_installed = { "lua", "python", "rust", "vim", "markdown" },
+                ensure_installed = { "lua", "python", "rust", "vim", "markdown", "typescript", "javascript", "tsx" },
                 highlight = { enable = true },
                 indent = { enable = true },
             })
@@ -24,7 +24,7 @@ return {
         "williamboman/mason-lspconfig.nvim",
         config = function()
             require("mason-lspconfig").setup({
-                ensure_installed = { "lua_ls", "pyright", "rust_analyzer" }
+                ensure_installed = { "lua_ls", "pyright", "rust_analyzer", "ts_ls" }
             })
         end
     },
@@ -94,6 +94,11 @@ return {
                 capabilities = capabilities,
                 filetypes = { "python" }
             })
+            lspconfig.ts_ls.setup({
+                capabilities = capabilities,
+                filetypes = { "typescript", "javascript", "typescriptreact", "javascriptreact", "typescript.tsx", "javascript.jsx" },
+                cmd = { "typescript-language-server", "--stdio" }
+            })
             vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
             vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {})
             vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, {})
@@ -111,6 +116,8 @@ return {
                     null_ls.builtins.formatting.stylua,
                     null_ls.builtins.formatting.black,
                     null_ls.builtins.formatting.isort,
+                    null_ls.builtins.formatting.prettier,
+                    null_ls.builtins.diagnostics.eslint,
                     null_ls.builtins.completion.spell,
                 },
             })
@@ -131,6 +138,8 @@ return {
                 check_ts = true,
                 ts_config = {
                     lua = { 'string' },
+                    javascript = { 'template_string' },
+                    typescript = { 'template_string' },
                 }
             })
             local cmp_autopairs = require('nvim-autopairs.completion.cmp')
