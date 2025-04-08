@@ -99,6 +99,16 @@ return {
                 filetypes = { "typescript", "javascript", "typescriptreact", "javascriptreact", "typescript.tsx", "javascript.jsx" },
                 cmd = { "typescript-language-server", "--stdio" }
             })
+            lspconfig.eslint.setup({
+            capabilities = capabilities,
+            filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+            cmd = { "vscode-eslint-language-server", "--stdio" },
+            settings = {
+                format = true,
+                lint = true,
+            },
+            root_dir = lspconfig.util.root_pattern(".eslintrc", ".eslintrc.js", ".eslintrc.json"),
+        })
             vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
             vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {})
             vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, {})
@@ -117,9 +127,9 @@ return {
                     null_ls.builtins.formatting.black,
                     null_ls.builtins.formatting.isort,
                     null_ls.builtins.formatting.prettier,
-                    null_ls.builtins.diagnostics.eslint,
                     null_ls.builtins.completion.spell,
                 },
+                debug = true,
             })
             vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, {})
             vim.api.nvim_create_autocmd("BufWritePre", {
