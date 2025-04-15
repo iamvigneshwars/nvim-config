@@ -100,15 +100,15 @@ return {
                 cmd = { "typescript-language-server", "--stdio" }
             })
             lspconfig.eslint.setup({
-            capabilities = capabilities,
-            filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
-            cmd = { "vscode-eslint-language-server", "--stdio" },
-            settings = {
-                format = true,
-                lint = true,
-            },
-            root_dir = lspconfig.util.root_pattern(".eslintrc", ".eslintrc.js", ".eslintrc.json"),
-        })
+                capabilities = capabilities,
+                filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+                cmd = { "vscode-eslint-language-server", "--stdio" },
+                settings = {
+                    format = true,
+                    lint = true,
+                },
+                root_dir = lspconfig.util.root_pattern(".eslintrc", ".eslintrc.js", ".eslintrc.json"),
+            })
             vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
             vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {})
             vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, {})
@@ -165,18 +165,41 @@ return {
         "simrat39/rust-tools.nvim",
         dependencies = {
             "neovim/nvim-lspconfig",
+            "j-hui/fidget.nvim",
         },
         config = function()
+            require("fidget").setup({
+                progress = {
+                    display = {
+                        progress_icon = { "◑", "◒", "◐", "◓" },
+                        done_icon = "✓",
+                    },
+                },
+                notification = {
+                    window = {
+                        winblend = 0,
+                    },
+                },
+            })
             local rt = require("rust-tools")
             rt.setup({
                 server = {
-                    on_attach = function(_, bufnr)
+                    on_attach = function(client, bufnr)
                         rt.inlay_hints.enable()
                         vim.keymap.set("n", "K", rt.hover_actions.hover_actions, { buffer = bufnr })
                         vim.keymap.set("n", "<Leader>ca", rt.code_action_group.code_action_group, { buffer = bufnr })
                         vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = bufnr })
                         vim.keymap.set("n", "gr", vim.lsp.buf.references, { buffer = bufnr })
                         vim.keymap.set("n", "<Leader>rn", vim.lsp.buf.rename, { buffer = bufnr })
+                        vim.keymap.set("n", "<Leader>rs", function()
+                            vim.cmd("LspInfo")
+                        end, { buffer = bufnr, desc = "Rust Analyzer Status" })
+                        vim.keymap.set("n", "<Leader>rl", function()
+                            vim.cmd("LspLog")
+                        end, { buffer = bufnr, desc = "Rust Analyzer Logs" })
+                        if client.name == "rust_analyzer" then
+                            vim.notify("rust-analyzer is ready", vim.log.levels.INFO)
+                        end
                     end,
                     settings = {
                         ["rust-analyzer"] = {
@@ -209,6 +232,10 @@ return {
                                 loadOutDirsFromCheck = true,
                                 allFeatures = true,
                             },
+                            trace = {
+                                server = "verbose",
+                                extension = true,
+                            },
                         }
                     },
                 },
@@ -216,8 +243,64 @@ return {
                     hover_actions = {
                         auto_focus = true,
                     },
+                    executor = {
+                        execute_command = function(command, args, cwd)
+                            vim.notify("Executing: " .. command .. " " .. table.concat(args, " "), vim.log.levels.INFO)
+                            return vim.fn.jobstart({ command, unpack(args) }, {
+                                cwd = cwd,
+                                on_exit = function(_, code)
+                                    if code ~= 0 then
+                                        vim.notify("Command failed with code: " .. code, vim.log.levels.ERROR)
+                                    end
+                                end,
+                            })
+                        end,
+                    },
                 },
             })
+            vim.diagnostic.config({
+                virtual_text = {
+                    prefix = "●",
+                },
+                signs = true,
+                underline = true,
+                update_in_insert = false,
+                severity_sort = true,
+            })
+            require('lualine').setup {
+                sections = {
+                    lualine_c = {
+                        {
+                            'diagnostics',
+                            sources = { 'nvim_lsp' },
+                            symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
+                            colored = true,
+                        },
+                        {
+                            function()
+                                local clients = vim.lsp.get_active_clients({ bufnr = 0 })
+                                for _, client in ipairs(clients) do
+                                    if client.name == "rust_analyzer" then
+                                        return "rust-analyzer ✓"
+                                    end
+                                end
+                                return "rust-analyzer ✗"
+                            end,
+                            cond = function()
+                                return vim.bo.filetype == "rust"
+                            end,
+                            color = { fg = "#5ebd73" },
+                        }
+                    }
+                }
+            }
+        end
+    },
+    {
+        "j-hui/fidget.nvim",
+        tag = "legacy",
+        config = function()
+            require("fidget").setup()
         end
     }
 }

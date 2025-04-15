@@ -52,6 +52,7 @@ return {
                 disable_nvimtree_bg = true,
                 color_overrides = {
                     vscBack = '#000000',
+                    vscGreen = '#76D765',
                 },
                 group_overrides = {
                     Normal = { bg = '#000000' },
@@ -63,6 +64,11 @@ return {
                     TabLineFill = { bg = '#000000' },
                     SignColumn = { bg = '#000000' },
                     LineNr = { bg = '#000000' },
+                    Comment = { fg = '#707070', italic = true },
+                    LineComment = { fg = '#707070', italic = true },
+                    Special = { fg = '#4CB2FF' },
+                    Directory = { fg = '#4CB2FF' },
+                    Title = { fg = '#4CB2FF' },
                 }
             })
             vim.cmd.colorscheme("vscode")
@@ -70,6 +76,12 @@ return {
             vim.cmd([[
                 highlight Normal guibg=#000000 ctermbg=0
                 highlight NonText guibg=#000000 ctermbg=0
+                highlight Comment guifg=#707070 gui=italic
+                highlight @comment guifg=#707070 gui=italic
+                highlight Directory guifg=#4CB2FF
+                highlight @namespace guifg=#4CB2FF
+                highlight Special guifg=#4CB2FF
+                highlight @text.title guifg=#4CB2FF
             ]])
         end
     }
