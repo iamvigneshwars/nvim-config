@@ -1,30 +1,30 @@
-return {
-    {
-        "EdenEast/nightfox.nvim",
-        config = function()
-            require("nightfox").setup({
-                options = {
-                    transparent = false,
-                },
-                groups = {
-                    all = {
-                        -- Set the background to pitch black (#000000)
-                        Normal = { bg = "#000000" },
-                        NormalFloat = { bg = "#000000" },
-
-                        -- These settings help maintain consistency
-                        StatusLine = { bg = "#000000" },
-                        VertSplit = { bg = "#000000" },
-                        TabLine = { bg = "#000000" },
-                        TabLineFill = { bg = "#000000" },
-                    }
-                }
-            })
-
-            vim.cmd.colorscheme("carbonfox")
-        end
-    }
-}
+-- return{
+--     {
+--         "EdenEast/nightfox.nvim",
+--         config = function()
+--             require("nightfox").setup({
+--                 options = {
+--                     transparent = false,
+--                 },
+--                 groups = {
+--                     all = {
+--                         -- Set the background to pitch black (#000000)
+--                         Normal = { bg = "#000000" },
+--                         NormalFloat = { bg = "#000000" },
+--
+--                         -- These settings help maintain consistency
+--                         StatusLine = { bg = "#000000" },
+--                         VertSplit = { bg = "#000000" },
+--                         TabLine = { bg = "#000000" },
+--                         TabLineFill = { bg = "#000000" },
+--                     }
+--                 }
+--             })
+--
+--             vim.cmd.colorscheme("carbonfox")
+--         end
+--     }
+-- }
 
 -- return {
 --     "tiagovla/tokyodark.nvim",
@@ -41,3 +41,36 @@ return {
 --         vim.api.nvim_set_hl(0, "Directory", { fg = "#5e81ac" })
 --     end,
 -- }
+return {
+    {
+        "Mofiqul/vscode.nvim",
+        priority = 1000,
+        config = function()
+            require("vscode").setup({
+                transparent = false,
+                italic_comments = true,
+                disable_nvimtree_bg = true,
+                color_overrides = {
+                    vscBack = '#000000',
+                },
+                group_overrides = {
+                    Normal = { bg = '#000000' },
+                    NormalFloat = { bg = '#000000' },
+                    StatusLine = { bg = '#000000' },
+                    StatusLineNC = { bg = '#000000' },
+                    VertSplit = { bg = '#000000' },
+                    TabLine = { bg = '#000000' },
+                    TabLineFill = { bg = '#000000' },
+                    SignColumn = { bg = '#000000' },
+                    LineNr = { bg = '#000000' },
+                }
+            })
+            vim.cmd.colorscheme("vscode")
+            vim.o.background = "dark"
+            vim.cmd([[
+                highlight Normal guibg=#000000 ctermbg=0
+                highlight NonText guibg=#000000 ctermbg=0
+            ]])
+        end
+    }
+}
