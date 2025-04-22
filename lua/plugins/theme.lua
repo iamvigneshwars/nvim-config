@@ -1,27 +1,27 @@
-return {
-    {
-        "EdenEast/nightfox.nvim",
-        config = function()
-            require("nightfox").setup({
-                options = {
-                    transparent = false,
-                },
-                groups = {
-                    all = {
-                        Normal = { bg = "#000000" },
-                        NormalFloat = { bg = "#000000" },
-                        StatusLine = { bg = "#000000" },
-                        VertSplit = { bg = "#000000" },
-                        TabLine = { bg = "#000000" },
-                        TabLineFill = { bg = "#000000" },
-                    }
-                }
-            })
-
-            vim.cmd.colorscheme("carbonfox")
-        end
-    }
-}
+-- return {
+--     {
+--         "EdenEast/nightfox.nvim",
+--         config = function()
+--             require("nightfox").setup({
+--                 options = {
+--                     transparent = false,
+--                 },
+--                 groups = {
+--                     all = {
+--                         Normal = { bg = "#000000" },
+--                         NormalFloat = { bg = "#000000" },
+--                         StatusLine = { bg = "#000000" },
+--                         VertSplit = { bg = "#000000" },
+--                         TabLine = { bg = "#000000" },
+--                         TabLineFill = { bg = "#000000" },
+--                     }
+--                 }
+--             })
+--
+--             vim.cmd.colorscheme("carbonfox")
+--         end
+--     }
+-- }
 
 -- return {
 --     "tiagovla/tokyodark.nvim",
@@ -83,3 +83,27 @@ return {
 --         end
 --     }
 -- }
+return {
+    {
+        "eldritch-theme/eldritch.nvim",
+        lazy = false,
+        priority = 1000,
+        opts = {
+            transparent = false,
+            colors = {
+                bg = "#000000"
+            },
+        },
+        config = function(_, opts)
+            require("eldritch").setup(opts)
+            vim.cmd("colorscheme eldritch")
+            vim.cmd("hi Normal guibg=#000000 ctermbg=0")
+            vim.cmd("hi NormalFloat guibg=#000000 ctermbg=0")
+            vim.cmd("hi NonText guibg=#000000 ctermbg=0")
+            vim.cmd("hi LineNr guibg=#000000 ctermbg=0")
+            vim.cmd("hi SignColumn guibg=#000000 ctermbg=0")
+            vim.cmd("hi EndOfBuffer guibg=#000000 ctermbg=0")
+            vim.opt.termguicolors = true
+        end,
+    }
+}
