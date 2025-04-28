@@ -1,27 +1,27 @@
--- return {
---     {
---         "EdenEast/nightfox.nvim",
---         config = function()
---             require("nightfox").setup({
---                 options = {
---                     transparent = false,
---                 },
---                 groups = {
---                     all = {
---                         Normal = { bg = "#000000" },
---                         NormalFloat = { bg = "#000000" },
---                         StatusLine = { bg = "#000000" },
---                         VertSplit = { bg = "#000000" },
---                         TabLine = { bg = "#000000" },
---                         TabLineFill = { bg = "#000000" },
---                     }
---                 }
---             })
---
---             vim.cmd.colorscheme("carbonfox")
---         end
---     }
--- }
+return {
+    {
+        "EdenEast/nightfox.nvim",
+        config = function()
+            require("nightfox").setup({
+                options = {
+                    transparent = false,
+                },
+                groups = {
+                    all = {
+                        Normal = { bg = "#000000" },
+                        NormalFloat = { bg = "#000000" },
+                        StatusLine = { bg = "#000000" },
+                        VertSplit = { bg = "#000000" },
+                        TabLine = { bg = "#000000" },
+                        TabLineFill = { bg = "#000000" },
+                    }
+                }
+            })
+
+            vim.cmd.colorscheme("carbonfox")
+        end
+    }
+}
 
 -- return {
 --     "tiagovla/tokyodark.nvim",
@@ -119,32 +119,32 @@
 --         vim.cmd.colorscheme "tokyonight"
 --     end
 -- }
-return {
-    {
-        "eldritch-theme/eldritch.nvim",
-        lazy = false,
-        priority = 1000,
-        config = function()
-            require("eldritch").setup({
-                palette = "darker",
-                transparent = false,
-                terminal_colors = true,
-                styles = {
-                    comments = { italic = true },
-                    keywords = { italic = true },
-                    functions = {},
-                    variables = {},
-                    sidebars = "dark",
-                    floats = "dark",
-                },
-                sidebars = { "qf", "help" },
-                hide_inactive_statusline = false,
-                dim_inactive = false,
-                lualine_bold = true,
-
-            })
-            vim.cmd("colorscheme eldritch")
-            vim.opt.termguicolors = true
-        end,
-    }
-}
+-- return {
+--     {
+--         "eldritch-theme/eldritch.nvim",
+--         lazy = false,
+--         priority = 1000,
+--         config = function()
+--             require("eldritch").setup({
+--                 palette = "darker",
+--                 transparent = false,
+--                 terminal_colors = true,
+--                 styles = {
+--                     comments = { italic = true },
+--                     keywords = { italic = true },
+--                     functions = {},
+--                     variables = {},
+--                     sidebars = "dark",
+--                     floats = "dark",
+--                 },
+--                 sidebars = { "qf", "help" },
+--                 hide_inactive_statusline = false,
+--                 dim_inactive = false,
+--                 lualine_bold = true,
+--
+--             })
+--             vim.cmd("colorscheme eldritch")
+--             vim.opt.termguicolors = true
+--         end,
+--     }
+-- }
