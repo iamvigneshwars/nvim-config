@@ -23,21 +23,21 @@
 --     }
 -- }
 
-return {
-    "tiagovla/tokyodark.nvim",
-    opts = {
-
-    },
-    config = function(_, opts)
-        require("tokyodark").setup(opts)
-        vim.cmd [[colorscheme tokyodark]]
-        vim.api.nvim_set_hl(0, "Normal", { bg = "#000000" })
-        vim.api.nvim_set_hl(0, "NormalNC", { bg = "#000000" })
-        vim.api.nvim_set_hl(0, "SignColumn", { bg = "#000000" })
-        vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "#000000" })
-        vim.api.nvim_set_hl(0, "Directory", { fg = "#5e81ac" })
-    end,
-}
+-- return {
+--     "tiagovla/tokyodark.nvim",
+--     opts = {
+--
+--     },
+--     config = function(_, opts)
+--         require("tokyodark").setup(opts)
+--         vim.cmd [[colorscheme tokyodark]]
+--         vim.api.nvim_set_hl(0, "Normal", { bg = "#000000" })
+--         vim.api.nvim_set_hl(0, "NormalNC", { bg = "#000000" })
+--         vim.api.nvim_set_hl(0, "SignColumn", { bg = "#000000" })
+--         vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "#000000" })
+--         vim.api.nvim_set_hl(0, "Directory", { fg = "#5e81ac" })
+--     end,
+-- }
 -- return {
 --     {
 --         "Mofiqul/vscode.nvim",
@@ -85,24 +85,6 @@ return {
 -- }
 -- return {
 --     {
---         "eldritch-theme/eldritch.nvim",
---         lazy = false,
---         priority = 1000,
---         opts = {
---             transparent = false,
---             colors = {
---                 bg = "#000000"
---             },
---         },
---         config = function(_, opts)
---             require("eldritch").setup(opts)
---             vim.cmd("colorscheme eldritch")
---             vim.opt.termguicolors = true
---         end,
---     }
--- }
--- return {
---     {
 --         "sainnhe/sonokai",
 --         lazy = false,
 --         priority = 1000,
@@ -137,3 +119,32 @@ return {
 --         vim.cmd.colorscheme "tokyonight"
 --     end
 -- }
+return {
+    {
+        "eldritch-theme/eldritch.nvim",
+        lazy = false,
+        priority = 1000,
+        config = function()
+            require("eldritch").setup({
+                palette = "darker",
+                transparent = false,
+                terminal_colors = true,
+                styles = {
+                    comments = { italic = true },
+                    keywords = { italic = true },
+                    functions = {},
+                    variables = {},
+                    sidebars = "dark",
+                    floats = "dark",
+                },
+                sidebars = { "qf", "help" },
+                hide_inactive_statusline = false,
+                dim_inactive = false,
+                lualine_bold = true,
+
+            })
+            vim.cmd("colorscheme eldritch")
+            vim.opt.termguicolors = true
+        end,
+    }
+}
