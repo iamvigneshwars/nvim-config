@@ -86,7 +86,13 @@ return {
             end
             vim.notify("Closed all terminals", vim.log.levels.INFO)
         end
-
+        _G.term_utils.new_buffer_term = function()
+            vim.cmd("enew")
+            vim.cmd("term")
+            vim.cmd("startinsert")
+        end
+        vim.api.nvim_set_keymap("n", "<leader>tb", "<cmd>lua _G.term_utils.new_buffer_term()<CR>",
+            { noremap = true, silent = true, desc = "New terminal in current window" })
         vim.api.nvim_set_keymap("n", "<leader>tc", "<cmd>lua _G.term_utils.close_all_terminals()<CR>",
             { noremap = true, silent = true, desc = "Close all terminals" })
         vim.api.nvim_set_keymap("n", "<leader>tt", "<cmd>ToggleTerm<CR>",
