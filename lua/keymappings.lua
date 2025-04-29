@@ -24,17 +24,12 @@ map('n', '<Leader>_', ':resize -5<CR>')
 -- Neo Tree
 map('n', '<C-n>', ':Neotree toggle<CR>')
 -- Tab management
-map('n', '<Leader>tn', ':tabnew<CR>')      -- New tab
-map('n', '<Leader>tc', ':tabclose<CR>')    -- Close tab
-map('n', '<Leader>tn', ':tabnext<CR>')     -- Next tab
+map('n', '<Leader>tn', ':tabnew<CR>', { noremap = true, silent = true, desc = "New tab" })
+map('n', '<Leader>te', ':tabclose<CR>')    -- Close tab
+map('n', '<Leader>tl', ':tabnext<CR>')     -- Next tab
 map('n', '<Leader>tp', ':tabprevious<CR>') --
 -- Run python
 map('n', '<C-c>', ':w<CR>:TermExec cmd="clear && python3 %"<CR>')
--- Alt+Shift+Arrow keys to move windows (similar to VSCode behavior)
-map('n', '<A-S-h>', '<C-w>H', { noremap = true, desc = "Move window to far left" })
-map('n', '<A-S-l>', '<C-w>L', { noremap = true, desc = "Move window to far right" })
-map('n', '<A-S-k>', '<C-w>K', { noremap = true, desc = "Move window to very top" })
-map('n', '<A-S-j>', '<C-w>J', { noremap = true, desc = "Move window to very bottom" })
 -- Move tabs left and right
 map('n', '<leader>{', ':tabmove -1<CR>', { noremap = true, silent = true, desc = "Move tab left" })
 map('n', '<leader>}', ':tabmove +1<CR>', { noremap = true, silent = true, desc = "Move tab right" })
