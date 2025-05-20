@@ -41,8 +41,9 @@ return {
             direction = "float",
             hidden = true,
             count = 99,
-            on_open = function()
+            on_open = function(term)
                 vim.cmd("startinsert!")
+                vim.api.nvim_buf_set_keymap(term.bufnr, 't', '<esc>', '<esc>', { noremap = true })
             end,
         })
         _G.term_utils.toggle_lazygit = function()
@@ -99,7 +100,11 @@ return {
             { noremap = true, silent = true, desc = "Toggle terminal" })
         function _G.set_terminal_keymaps()
             local opts = { noremap = true }
-            vim.api.nvim_buf_set_keymap(0, 't', '<esc>', [[<C-\><C-n>]], opts)
+            local buf = vim.api.nvim_get_current_buf()
+            local bufname = vim.api.nvim_buf_get_name(buf)
+            if not bufname:match("lazygit") then
+                vim.api.nvim_buf_set_keymap(0, 't', '<esc>', [[<C-\><C-n>]], opts)
+            end
             vim.api.nvim_buf_set_keymap(0, 't', '<C-h>', [[<C-\><C-n><C-W>h]], opts)
             vim.api.nvim_buf_set_keymap(0, 't', '<C-j>', [[<C-\><C-n><C-W>j]], opts)
             vim.api.nvim_buf_set_keymap(0, 't', '<C-k>', [[<C-\><C-n><C-W>k]], opts)
