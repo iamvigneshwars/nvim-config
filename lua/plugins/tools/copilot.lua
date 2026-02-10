@@ -4,7 +4,8 @@ return {
         cmd = "Copilot",
         event = "InsertEnter",
         config = function()
-            require("copilot").setup({
+            local node_path = "/dls/science/users/mrg27357/bin/node"
+            local opts = {
                 suggestion = {
                     enabled = true,
                     auto_trigger = true,
@@ -22,7 +23,11 @@ return {
                 filetypes = {
                     ["*"] = true,
                 },
-            })
+            }
+            if vim.fn.executable(node_path) == 1 then
+                opts.copilot_node_command = node_path
+            end
+            require("copilot").setup(opts)
         end,
     },
     {
