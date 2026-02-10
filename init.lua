@@ -37,7 +37,7 @@ require("lazy").setup({
         version = false,
     },
     install = {
-        colorscheme = { "carbonfox" },
+        colorscheme = { "habamax" },
     },
     checker = {
         enabled = true,
