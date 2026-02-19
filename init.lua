@@ -61,3 +61,8 @@ require("lazy").setup({
         },
     },
 })
+
+-- Theme manager (persistent + picker), independent of any single theme plugin.
+require("core.theme").setup({
+    default_theme = "eldritch-dark",
+})

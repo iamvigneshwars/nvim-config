@@ -37,6 +37,7 @@ return {
                 { "<leader>s", group = "Split" },
                 { "<leader>t", group = "Tab/Terminal" },
                 { "<leader>b", group = "Buffer" },
+                { "<leader>u", group = "UI/Theme" },
             })
         end,
     },
