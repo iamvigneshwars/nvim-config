@@ -58,6 +58,24 @@ return {
                     },
                 },
                 pickers = {
+                    buffers = {
+                        sort_mru = true,
+                        ignore_current_buffer = true,
+                        show_all_buffers = true,
+                        previewer = false,
+                        initial_mode = "normal",
+                        mappings = {
+                            n = {
+                                ["j"] = actions.move_selection_next,
+                                ["k"] = actions.move_selection_previous,
+                                ["dd"] = actions.delete_buffer,
+                                ["x"] = actions.delete_buffer,
+                            },
+                            i = {
+                                ["<C-d>"] = actions.delete_buffer,
+                            },
+                        },
+                    },
                     find_files = {
                         hidden = true,
                         find_command = { "rg", "--files", "--hidden", "--glob", "!.git/*" },
