@@ -100,6 +100,7 @@ return {
                 },
             },
             yamlls = {
+                filetypes = { "yaml", "yaml.docker-compose" },
                 settings = {
                     yaml = {
                         schemas = {

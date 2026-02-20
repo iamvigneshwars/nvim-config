@@ -26,6 +26,10 @@ return {
                         "html",
                         "css",
                     },
+                    -- Don't format Helm templates (detected as "helm" filetype)
+                    condition = function(utils)
+                        return vim.bo.filetype ~= "helm"
+                    end,
                 }),
             },
             -- Format on save

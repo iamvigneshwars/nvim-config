@@ -52,7 +52,7 @@ autocmd("FileType", {
 -- YAML (2 spaces, strict)
 autocmd("FileType", {
     group = "FileTypeSettings",
-    pattern = { "yaml", "yml" },
+    pattern = { "yaml", "yml", "helm" },
     callback = function()
         vim.opt_local.shiftwidth = 2
         vim.opt_local.tabstop = 2
@@ -89,6 +89,16 @@ autocmd("VimResized", {
     group = "ResizeSplits",
     callback = function()
         vim.cmd("tabdo wincmd =")
+    end,
+})
+
+-- Detect Helm templates (Go templating in YAML) and set filetype to "helm"
+augroup("HelmFiletype", { clear = true })
+autocmd({ "BufRead", "BufNewFile" }, {
+    group = "HelmFiletype",
+    pattern = "*/templates/*.yaml,*/templates/*.tpl,*/templates/*.yml,helmfile*.yaml",
+    callback = function()
+        vim.bo.filetype = "helm"
     end,
 })
 
